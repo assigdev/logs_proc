@@ -8,7 +8,21 @@
 
 {% block content %}
     <h4 style="text-align: center; margin: 20px 20px">Apache Log</h4>
+
     <div class="row">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <p>Search: </p>
+                </div>
+                <div class="col">
+                    <input type="text" name="ip" class="form-control" id="ipSearch" placeholder="IP">
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -26,7 +40,7 @@
                     <th>{{ item.ip }}</th>
                     <td>{{ item.datetime|date:'Y-m-d H:i' }}</td>
                     <td>{{ item.method }}</td>
-                    <td title="{{ item.uri}}">{{ item.uri|truncatechars:60 }}</td>
+                    <td title="{{ item.uri }}">{{ item.uri|truncatechars:60 }}</td>
                     <td>{{ item.status_code }}</td>
                     <td>{{ item.body_size }}</td>
                 </tr>
@@ -35,6 +49,10 @@
 
             </tbody>
         </table>
+        <h1>2</h1>
+        <p>{{ filter.form.as_p }}</p>
+        <p>{{ filter.qs.count }}</p>
+        <h2>3</h2>
     </div>
     {% include 'includes/pagination.html' %}
 

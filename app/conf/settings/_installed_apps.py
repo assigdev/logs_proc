@@ -15,7 +15,7 @@ MY_APPS = [
 ]
 
 INSTALLED_APPS = [
-
+    'django_filters',
 ]
 
 DEV_APS = [

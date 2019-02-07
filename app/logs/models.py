@@ -16,8 +16,8 @@ class LogItem(models.Model):
     @classmethod
     def get_statistics(cls, queryset):
         return {
-            'unique_ip': '',
-            'top_ten_ip': '',
-            'methods_count': '',
-            'bytes': ''
+            'unique_ips_count': queryset.values('ip').distinct().count(),
+            'top_ten_ips': queryset.values('ip').annotate(count=models.Count('ip')).order_by('-count')[:10],
+            'method_counts': queryset.values('method').annotate(count=models.Count('method')).order_by('-count'),
+            'bytes': queryset.aggregate(models.Sum('body_size')).get('body_size__sum')
         }

@@ -1,2 +1,57 @@
-<h5>Log statistics:</h5>
+<div class="col-md-12">
+    <h3 style="margin-top: 40px">Log statistics:</h3>
+</div>
+<table class="table table-bordered col-md-8">
+    <tr>
+        <th>Unique Ips count:</th>
+        <td>{{ statistics.unique_ips_count }}</td>
+    </tr>
+    <tr>
+        <th>Bytes:</th>
+        <td>{{ statistics.bytes|filesizeformat }}</td>
+    </tr>
+    <tr>
+        <th>Top 10 IPs:</th>
+        <td>
+            <table class="table table-striped col-md-4">
+                <thead>
+                <tr>
+                    <th scope="col">IP</th>
+                    <th scope="col">Count</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for top_ten_ip in statistics.top_ten_ips %}
+                    <tr>
+                        <th>{{ top_ten_ip.ip }}</th>
+                        <td>{{ top_ten_ip.count }}</td>
+                    </tr>
+                {% endfor %}
 
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <th>Methods:</th>
+        <td>
+            <table class="table table-striped col-md-4">
+                <thead>
+                <tr>
+                    <th scope="col">Method</th>
+                    <th scope="col">Count</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for method_count in statistics.method_counts %}
+                    <tr>
+                        <th>{{ method_count.method }}</th>
+                        <td>{{ method_count.count }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>

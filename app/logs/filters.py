@@ -1,4 +1,5 @@
 import django_filters
+
 from logs.models import LogItem
 
 

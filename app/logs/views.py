@@ -1,6 +1,7 @@
 from django.views.generic import ListView
-from logs.models import LogItem
+
 from logs.filters import LogItemFilter
+from logs.models import LogItem
 
 
 class LogListView(ListView):

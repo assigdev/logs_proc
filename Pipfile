@@ -10,6 +10,7 @@ django = "*"
 "psycopg2-binary" = "*"
 requests = "*"
 tqdm = "*"
+openpyxl = "*"
 
 [requires]
 python_version = "3.6"

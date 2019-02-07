@@ -21,3 +21,6 @@ class LogItem(models.Model):
             'method_counts': queryset.values('method').annotate(count=models.Count('method')).order_by('-count'),
             'bytes': queryset.aggregate(models.Sum('body_size')).get('body_size__sum')
         }
+
+    class Meta:
+        ordering = ('datetime',)

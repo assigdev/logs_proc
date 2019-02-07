@@ -12,3 +12,12 @@ class LogItem(models.Model):
 
     def __str__(self):
         return f'{self.ip}-{self.datetime}'
+
+    @classmethod
+    def get_statistics(cls, queryset):
+        return {
+            'unique_ip': '',
+            'top_ten_ip': '',
+            'methods_count': '',
+            'bytes': ''
+        }

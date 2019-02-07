@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Apache log
+{% endblock %}
+
+
+{% block content %}
+    <h4 style="text-align: center; margin: 20px 20px">Apache Log</h4>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ip</th>
+                <th scope="col">date</th>
+                <th scope="col">method</th>
+                <th scope="col">uri</th>
+                <th scope="col">status code</th>
+                <th scope="col">body size</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in logitem_list %}
+                <tr>
+                    <th>{{ item.ip }}</th>
+                    <td>{{ item.datetime|date:'Y-m-d H:i' }}</td>
+                    <td>{{ item.method }}</td>
+                    <td title="{{ item.uri}}">{{ item.uri|truncatechars:60 }}</td>
+                    <td>{{ item.status_code }}</td>
+                    <td>{{ item.body_size }}</td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    {% include 'includes/pagination.html' %}
+
+    <div class="row">
+        {% include 'logs/log_statistics.html' %}
+    </div>
+
+{% endblock %}
+
+

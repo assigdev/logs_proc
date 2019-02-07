@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from logs.views import LogListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', LogListView.as_view())
 ]

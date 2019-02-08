@@ -24,3 +24,13 @@ class LogItem(models.Model):
 
     class Meta:
         ordering = ('datetime',)
+        indexes = [
+            models.Index(
+                fields=['ip'],
+                name='ip_idx',
+            ),
+            models.Index(
+                fields=['datetime'],
+                name='datetime_idx',
+            ),
+        ]

@@ -19,7 +19,7 @@ INSTALLED_APPS = [
 ]
 
 DEV_APS = [
-
+    'debug_toolbar',
 ]
 
 PROD_APS = [
@@ -27,3 +27,4 @@ PROD_APS = [
 ]
 
 INSTALLED_APPS = DJANGO_APPS + INSTALLED_APPS + MY_APPS
+

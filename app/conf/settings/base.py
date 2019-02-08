@@ -114,3 +114,14 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+
+
+from ._installed_apps import *
+
+if DEBUG:
+    INSTALLED_APPS += DEV_APS
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+else:
+    INSTALLED_APPS += PROD_APS
+
+INTERNAL_IPS = ['127.0.0.1']

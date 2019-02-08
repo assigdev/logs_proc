@@ -4,13 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
+django-debug-toolbar = "*"
 
 [packages]
-django = "*"
+django = "==2.1.5"
 "psycopg2-binary" = "*"
 requests = "*"
 tqdm = "*"
 openpyxl = "*"
+django-filter = "==2.1.0"
 
 [requires]
 python_version = "3.6"

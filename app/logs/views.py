@@ -1,9 +1,8 @@
 from django.views.generic import ListView
 
+from logs.exports import LogToExcelExporter
 from logs.filters import LogItemFilter
 from logs.models import LogItem
-
-from logs.exports import LogToExcelExporter
 
 
 class LogListView(ListView):
@@ -16,9 +15,8 @@ class LogListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if self.request.GET.get('ip'):
-            queryset = LogItemFilter(self.request.GET, queryset).qs
-        return queryset
+        filter = LogItemFilter(self.request.GET, queryset)
+        return filter.qs
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()

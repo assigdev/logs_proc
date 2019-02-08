@@ -18,6 +18,7 @@ class Command(BaseCommand):
     CHUNK_SIZE = 1024
     MASS_SAVE_COUNT = 1000
     MAX_CHARS = 300
+    VALID_METHODS = ['POST', 'GET', 'HEAD', 'PUT', 'DELETE' 'OPTION']
 
     help = "parse apache logs from url"
 
@@ -48,7 +49,7 @@ class Command(BaseCommand):
         resp = requests.get(url, stream=True)
         file_size = int(resp.headers['Content-Length'])
         with open(self.FILE_PATH, 'wb') as f:
-            with tqdm(total=file_size / self.CHUNK_SIZE, desc='download log file', ) as pbar:
+            with tqdm(total=file_size / self.CHUNK_SIZE, desc='log file downloading', ) as pbar:
                 for chunk in resp.iter_content(chunk_size=self.CHUNK_SIZE):
                     if chunk:
                         f.write(chunk)
@@ -104,9 +105,19 @@ class Command(BaseCommand):
             return {
                 'ip': record[0],
                 'date': f"{record[3][1:]} {record[4][:-1]}",
-                'method': record[5][1:9],
+                'method': self._get_method(record[5]),
                 'uri': record[6][:self.MAX_CHARS],
                 'status': record[8],
                 'body_size': record[9] if record[9].isdigit() else 0,
                 'agent': ' '.join(record[11:-1])[:self.MAX_CHARS],
             }
+
+    def _get_method(self, method):
+        if len(method) <= 8:
+            method = method[1:].upper()
+            if method in self.VALID_METHODS:
+                return method
+        for op in self.VALID_METHODS:
+            if method.endswith(op):
+                return op
+        return 'UNKNOWN'

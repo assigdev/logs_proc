@@ -7,7 +7,7 @@ name = "pypi"
 django-debug-toolbar = "*"
 
 [packages]
-django = "==2.1.5"
+django = "==2.1.11"
 "psycopg2-binary" = "*"
 requests = "*"
 tqdm = "*"
